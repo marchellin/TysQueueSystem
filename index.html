@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Panggilan Loket</title>
+    <link rel="icon" href="puskesmas.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-area">
+                <span class="material-icons">local_hospital</span>
+                <h1>Puskesmas Suranadi</h1>
+            </div>
+            <div class="date-area" id="currentDate">--</div>
+        </header>
+
+        <main>
+            <div class="counter-display">
+                <p class="subtitle">NOMOR ANTRIAN SAAT INI</p>
+                <h2 id="currentNumberDisplay">000</h2>
+            </div>
+
+            <div class="controls">
+                <button id="btnPanggilUlang" class="btn secondary">
+                    <span class="material-icons">replay</span>
+                    Panggil Ulang
+                </button>
+                <button id="btnSelanjutnya" class="btn primary">
+                    <span class="material-icons">navigate_next</span>
+                    Panggil Selanjutnya
+                </button>
+            </div>
+
+            <div class="manual-call">
+                <p>Panggil Nomor Spesifik:</p>
+                <div class="input-group">
+                    <input type="number" id="inputManual" min="1" max="999" placeholder="Contoh: 15">
+                    <button id="btnPanggilManual" class="btn outline">Panggil</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <button id="btnReset" class="btn text-danger">
+                <span class="material-icons">restart_alt</span> Reset Antrian ke 0
+            </button>
+        </footer>
+    </div>
+
+    <!-- Modal Konfirmasi Reset -->
+    <div id="resetModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="material-icons warning-icon">warning</span>
+            <h3>Konfirmasi Reset</h3>
+            <p>Apakah Anda yakin ingin mengembalikan antrian ke nomor 0? Tindakan ini tidak bisa dibatalkan.</p>
+            <div class="modal-actions">
+                <button id="btnCancelReset" class="btn secondary">Batal</button>
+                <button id="btnConfirmReset" class="btn primary btn-danger">Ya, Reset Antrian</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
