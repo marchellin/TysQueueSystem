@@ -59,35 +59,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const textToSpeak = `Nomor antrian, ${spokenNumber}, silakan menuju loket pendaftaran.`;
         const utterance = new SpeechSynthesisUtterance(textToSpeak);
-        
+
         // Paksa ke Bahasa Indonesia
-        utterance.lang = 'id-ID'; 
-        utterance.rate = 0.9; 
+        utterance.lang = 'id-ID';
+        utterance.rate = 0.9;
         utterance.pitch = 1;
 
         // Ambil daftar suara terbaru dari browser
         let voices = window.speechSynthesis.getVoices();
-        
-        // Jika masih kosong (terkadang Chrome agak lambat memuat), pakai availableVoices dari atas
+
+        // Jika masih kosong, pakai availableVoices dari atas
         if (voices.length === 0) {
             voices = availableVoices;
         }
 
-        // Mencari suara yang PASTI berbahasa Indonesia
-        // 'Google Bahasa Indonesia' (Chrome), 'Microsoft Andika' / 'Microsoft Gadis' (Windows)
-        let idVoice = voices.find(voice => 
-            voice.name.includes('Google Bahasa Indonesia') ||
+        // Mencari suara yang PASTI berbahasa Indonesia (dukungan untuk Android & iOS)
+        let idVoice = voices.find(voice =>
+            voice.lang === 'id-ID' ||
+            voice.lang === 'id_ID' ||
+            voice.lang === 'in-ID' ||
+            voice.name.includes('Indonesia') ||
+            voice.name.includes('Damayanti') || // Suara bahasa Indonesia di iOS/Mac
             voice.name.includes('Andika') ||
-            voice.name.includes('Gadis') ||
-            voice.lang === 'id-ID' || 
-            voice.lang === 'id_ID'
+            voice.name.includes('Gadis')
         );
 
         if (idVoice) {
             utterance.voice = idVoice;
         } else {
-            // Jika komputer benar-benar tidak punya suara bahasa Indonesia
-            console.warn("Suara Indonesia tidak terdeteksi. Menggunakan suara default sistem (bisa terdengar seperti bule).");
+            console.warn("Suara Indonesia tidak terdeteksi. Menggunakan suara default sistem.");
         }
 
         window.speechSynthesis.speak(utterance);
