@@ -35,5 +35,16 @@ A lightweight, automated queue calling system built specifically for Indonesian 
 - A modern web browser (Latest version of **Google Chrome** is highly recommended).
 - An Indonesian *Voice Pack* installed on Windows (usually named *Microsoft Andika*, *Microsoft Gadis*, or *Google Bahasa Indonesia*) to ensure the queue announcements sound natural.
 
+## 📱 Mobile Support & Troubleshooting
+If you deploy this application (e.g., via Vercel) and open it on a mobile device, you might notice that the voice sounds like a foreigner (English accent) instead of Indonesian. This happens because the Indonesian Voice Data is not set up properly on the phone's OS.
+
+**How to fix on Android:**
+1. Open **Settings** on your phone.
+2. Search for **Text-to-speech** (or "Keluaran teks-ke-suara").
+3. Ensure the **Preferred engine** is set to **Speech Services by Google** (not Samsung TTS or Xiaomi TTS).
+4. Click the **Settings (Gear icon)** next to the engine name -> **Install voice data**.
+5. Find **Indonesian (Indonesia)** and download the voice pack if it's not installed.
+6. Force close your browser (swipe up from recent apps), reopen the web app, and try again!
+
 ---
 *Built to simplify services and accelerate queue management in public health centers.*
