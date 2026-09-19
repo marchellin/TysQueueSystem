@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Referensi ke elemen-elemen HTML
     const currentNumberDisplay = document.getElementById('currentNumberDisplay');
     const btnSelanjutnya = document.getElementById('btnSelanjutnya');
     const btnPanggilUlang = document.getElementById('btnPanggilUlang');
@@ -8,18 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnReset = document.getElementById('btnReset');
     const currentDateDisplay = document.getElementById('currentDate');
 
-    // Menyiapkan penyimpanan lokal (Local Storage)
+    // setting Local Storage
     const STORAGE_KEY = 'queue_number';
     let currentNumber = parseInt(localStorage.getItem(STORAGE_KEY)) || 0;
 
-    // Menampilkan tanggal hari ini
+    // Today date
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     currentDateDisplay.textContent = new Date().toLocaleDateString('id-ID', options);
 
-    // Update tampilan awal saat pertama kali dibuka
+    // Update first time open page
     updateDisplay();
 
-    // Fungsi pembantu: Menyesuaikan tampilan dengan suara (hanya tambah satu '0' jika < 100)
+    // formatting for 3 digit number
     function formatNumber(num) {
         if (num === 0) return "000"; // Tampilan awal saat belum ada antrian
         if (num < 10) return '00' + num;
@@ -27,14 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return num.toString();
     }
 
-    // Fungsi pembantu: Update angka di layar dan simpan ke LocalStorage
+    // update number and save to LocalStorage
     function updateDisplay() {
         const formatted = formatNumber(currentNumber);
-        currentNumberDisplay.textContent = formatted; // TODO: change to 3 digit
+        currentNumberDisplay.textContent = formatted;
         localStorage.setItem(STORAGE_KEY, currentNumber);
     }
 
-    // Global penampung suara (voices) agar bisa di-load sempurna
+    // get voices from browser
     let availableVoices = [];
     function loadVoices() {
         availableVoices = window.speechSynthesis.getVoices();
@@ -48,42 +47,39 @@ document.addEventListener('DOMContentLoaded', () => {
     function speak(number) {
         window.speechSynthesis.cancel();
 
-        // Menentukan cara membaca agar "kosong" (nol di depan) juga disebut,
-        // tapi angka puluhan/ratusan tetap dibaca secara natural.
-        // Sesuai request: Jika angka masih satuan (1-9) atau puluhan (10-99), sebut "kosong" 1 kali saja
+        // add "kosong" for numbers less than 100
         let spokenNumber = "";
         if(number < 10){
-            spokenNumber = `kosong kosong ${number}`; // contoh: kosong kosong satu, kosong kosong dua
+            spokenNumber = `kosong kosong ${number}`; // example: kosong kosong satu, kosong kosong dua
         }
         else if (number < 100) {
-            spokenNumber = `kosong ${number}`; // contoh: kosong satu, kosong dua, kosong lima belas
+            spokenNumber = `kosong ${number}`; // example: kosong satu, kosong dua, kosong lima belas
         } else {
-            spokenNumber = `${number}`;        // contoh: seratus dua puluh lima
+            spokenNumber = `${number}`;        // example: seratus dua puluh lima
         }
 
-        const textToSpeak = `Nomor antrian, ${spokenNumber}, o so se'o se yo Taeyang Sung inmida.`;
+        const textToSpeak = `Nomor antrian, ${spokenNumber}, o so se yo Taeyang Sung inmida.`;
         const utterance = new SpeechSynthesisUtterance(textToSpeak);
 
-        // Paksa ke Bahasa Indonesia
+        // set to bahasa Indonesia
         utterance.lang = 'id-ID';
         utterance.rate = 0.5; // Speech speed (0.1 - 10)
         utterance.pitch = 1;
 
-        // Ambil daftar suara terbaru dari browser
+        // get voices from browser
         let voices = window.speechSynthesis.getVoices();
 
-        // Jika masih kosong, pakai availableVoices dari atas
         if (voices.length === 0) {
             voices = availableVoices;
         }
 
-        // Mencari suara yang PASTI berbahasa Indonesia (dukungan untuk Android & iOS)
+        // get bahasa Indonesia TTS for Android & ios
         let idVoice = voices.find(voice =>
             voice.lang === 'id-ID' ||
             voice.lang === 'id_ID' ||
             voice.lang === 'in-ID' ||
             voice.name.includes('Indonesia') ||
-            voice.name.includes('Damayanti') || // Suara bahasa Indonesia di iOS/Mac
+            voice.name.includes('Damayanti') || // Voice bahasa Indonesia di iOS/Mac
             voice.name.includes('Andika') ||
             voice.name.includes('Gadis')
         );
@@ -97,14 +93,14 @@ document.addEventListener('DOMContentLoaded', () => {
         window.speechSynthesis.speak(utterance);
     }
 
-    // Event Listener: Jika tombol "Panggil Selanjutnya" diklik
+    // button "Selanjutnya" add 1 to queue
     btnSelanjutnya.addEventListener('click', () => {
         currentNumber++; // add 1 queue
         updateDisplay();
         speak(currentNumber);
     });
 
-    // Event Listener: Jika tombol "Panggil Ulang" diklik
+    // button "Panggil Ulang" repeat the current queue number
     btnPanggilUlang.addEventListener('click', () => {
         if (currentNumber > 0) {
             speak(currentNumber);
@@ -113,40 +109,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Event Listener: Jika tombol panggil manual diklik
+    // button "Panggil Manual" call a specific queue number
     btnPanggilManual.addEventListener('click', () => {
         const val = parseInt(inputManual.value);
         if (!isNaN(val) && val > 0) {
-            currentNumber = val; // Set antrian ke angka yang diketik
+            currentNumber = val; 
             updateDisplay();
             speak(currentNumber);
-            inputManual.value = ''; // Kosongkan kotak input setelah dipanggil
+            inputManual.value = '';
         } else {
             alert("Masukkan nomor antrian yang valid!");
         }
     });
 
-    // Modal Elements untuk Reset
+    // Modal Elements for Reset
     const resetModal = document.getElementById('resetModal');
     const btnCancelReset = document.getElementById('btnCancelReset');
     const btnConfirmReset = document.getElementById('btnConfirmReset');
 
-    // Event Listener: Jika tombol reset diklik (tampilkan modal custom)
+    // button "Reset" show modal confirmation
     btnReset.addEventListener('click', () => {
         resetModal.classList.add('active');
     });
 
-    // Tombol Batal di Modal
+    // button "Batal" in Modal
     btnCancelReset.addEventListener('click', () => {
         resetModal.classList.remove('active');
     });
 
-    // Tombol Ya di Modal
+    // button "Ya" in Modal
     btnConfirmReset.addEventListener('click', () => {
         currentNumber = 0;
         updateDisplay();
         resetModal.classList.remove('active');
     });
-
-    // (Logika pemuatan suara dipindah ke atas)
 });
