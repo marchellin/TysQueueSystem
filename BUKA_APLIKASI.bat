@@ -1,5 +1,5 @@
 @echo off
-echo Membuka Sistem Panggilan Loket Puskesmas Suranadi...
+echo Membuka Sistem Antrian Taeyang Sung...
 
 :: Mencoba buka pakai Google Chrome dalam mode Aplikasi (tanpa tab/URL bar)
 start chrome --app="%~dp0index.html"

@@ -1,6 +1,6 @@
-# 🏥 Puskesmas Queue Management System
+# Taeyang Sung Queue Management System
 
-A lightweight, automated queue calling system built specifically for Indonesian Public Health Centers (Puskesmas). This web application utilizes the browser's built-in **Text-to-Speech (TTS)** technology to announce patient queue numbers naturally in Indonesian.
+An automated queue calling system. This web application utilizes the browser's built-in **Text-to-Speech (TTS)** technology to announce patient queue numbers naturally in Indonesian.
 
 ## ✨ Key Features
 
@@ -20,16 +20,12 @@ A lightweight, automated queue calling system built specifically for Indonesian 
 
 ## 💻 How to Use (Installation)
 
-1. Clone this repository or download the source code (Download ZIP).
-   ```bash
-   git clone https://github.com/Maoelan/sistem-panggilan-puskesmas.git
-   ```
-2. **The Easiest Way:**
-   Simply double-click the `BUKA_APLIKASI.bat` file. Your computer will automatically launch the application in *Standalone Window* mode using Google Chrome/Edge.
+1. **Open via bat File**
+   Double-click the `BUKA_APLIKASI.bat` file. Your computer will automatically launch the application in *Standalone Window* mode using Google Chrome/Edge.
 3. **Install to Desktop (PWA via Chrome):**
    - Open `index.html` using Google Chrome.
    - Click the three-dot menu in the top right corner of Chrome -> **Save and Share** -> **Create Shortcut**.
-   - Check the **Open as window** option, then click Create. The Puskesmas logo icon will automatically appear on your Desktop and Taskbar, ready to use.
+   - Check the **Open as window** option, then click Create.
 
 ## 📥 System Requirements
 - A modern web browser (Latest version of **Google Chrome** is highly recommended).
@@ -47,4 +43,4 @@ If you deploy this application (e.g., via Vercel) and open it on a mobile device
 6. Force close your browser (swipe up from recent apps), reopen the web app, and try again!
 
 ---
-*Built to simplify services and accelerate queue management in public health centers.*
+Kudos to Puskesma Queue MAnagement System

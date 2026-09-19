@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentDateDisplay = document.getElementById('currentDate');
 
     // Menyiapkan penyimpanan lokal (Local Storage)
-    const STORAGE_KEY = 'puskesmas_antrian_number';
+    const STORAGE_KEY = 'queue_number';
     let currentNumber = parseInt(localStorage.getItem(STORAGE_KEY)) || 0;
 
     // Menampilkan tanggal hari ini
@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fungsi pembantu: Menyesuaikan tampilan dengan suara (hanya tambah satu '0' jika < 100)
     function formatNumber(num) {
         if (num === 0) return "000"; // Tampilan awal saat belum ada antrian
+        if (num < 10) return '00' + num;
         if (num < 100) return '0' + num;
         return num.toString();
     }
@@ -29,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fungsi pembantu: Update angka di layar dan simpan ke LocalStorage
     function updateDisplay() {
         const formatted = formatNumber(currentNumber);
-        currentNumberDisplay.textContent = formatted;
+        currentNumberDisplay.textContent = formatted; // TODO: change to 3 digit
         localStorage.setItem(STORAGE_KEY, currentNumber);
     }
 
@@ -43,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         speechSynthesis.onvoiceschanged = loadVoices;
     }
 
-    // Fungsi Utama: Mengubah Teks menjadi Suara (Text-to-Speech)
+    // Text-to-Speech)
     function speak(number) {
         window.speechSynthesis.cancel();
 
@@ -51,18 +52,21 @@ document.addEventListener('DOMContentLoaded', () => {
         // tapi angka puluhan/ratusan tetap dibaca secara natural.
         // Sesuai request: Jika angka masih satuan (1-9) atau puluhan (10-99), sebut "kosong" 1 kali saja
         let spokenNumber = "";
-        if (number < 100) {
+        if(number < 10){
+            spokenNumber = `kosong kosong ${number}`; // contoh: kosong kosong satu, kosong kosong dua
+        }
+        else if (number < 100) {
             spokenNumber = `kosong ${number}`; // contoh: kosong satu, kosong dua, kosong lima belas
         } else {
             spokenNumber = `${number}`;        // contoh: seratus dua puluh lima
         }
 
-        const textToSpeak = `Nomor antrian, ${spokenNumber}, silakan menuju loket pendaftaran.`;
+        const textToSpeak = `Nomor antrian, ${spokenNumber}, o so se'o se yo Taeyang Sung inmida.`;
         const utterance = new SpeechSynthesisUtterance(textToSpeak);
 
         // Paksa ke Bahasa Indonesia
         utterance.lang = 'id-ID';
-        utterance.rate = 0.9;
+        utterance.rate = 0.5; // Speech speed (0.1 - 10)
         utterance.pitch = 1;
 
         // Ambil daftar suara terbaru dari browser
@@ -95,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event Listener: Jika tombol "Panggil Selanjutnya" diklik
     btnSelanjutnya.addEventListener('click', () => {
-        currentNumber++; // Tambah angka 1
+        currentNumber++; // add 1 queue
         updateDisplay();
         speak(currentNumber);
     });
