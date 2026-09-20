@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antrian Taeyang Sung</title>
+    <title>Taeyang Sung Queue System</title>
     <link rel="icon" href="tys.jpeg" type="image/jpeg">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -15,8 +15,9 @@
     <div class="container">
         <header>
             <div class="logo-area">
-                <span class="material-icons">local_hospital</span> <!-- TODO change to tys icon png -->
-                <h1>Taeyang Sung</h1>
+                <!-- <span class="material-icons">local_hospital</span>  -->
+                <img src="tys_icon.png" class="logo-area icon" alt="Logo">
+                <h1>Taeyang Sung Queue System</h1>
             </div>
             <div class="date-area" id="currentDate">--</div>
         </header>
@@ -33,7 +34,7 @@
                     <span class="material-icons">replay</span>
                     Ulang
                 </button> -->
-                <button id="btnSelanjutnya" class="btn primary">
+                <button id="btnNext" class="btn primary">
                     <span class="material-icons">navigate_next</span>
                     Next
                 </button>
@@ -46,17 +47,21 @@
                         <!-- <span class="material-icons">play_arrow</span>  -->
                     </button>
                 </div>
+                
             </div>
-            </div>
+            <button id="btnReset" class="btn text-danger">
+                <span class="material-icons">restart_alt</span> Reset
+            </button>
+        </div>
 
             
         </main>
 
-        <footer>
+        <!-- <footer>
             <button id="btnReset" class="btn text-danger">
                 <span class="material-icons">restart_alt</span> Reset
             </button>
-        </footer>
+        </footer> -->
     </div>
 
     <!-- Modal Konfirmasi Reset -->

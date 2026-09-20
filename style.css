@@ -56,9 +56,9 @@ header {
     color: var(--primary-color);
 }
 
-.logo-area { /* change to tys icon, ask for png icon */
-    height: 40px;
-    width: auto;
+.logo-area img{ /* change to tys icon, ask for png icon */
+    height: 50px;
+    width: 50px;
     object-fit: contain;
 }
 
@@ -154,6 +154,7 @@ main {
     background: var(--primary-color);
     color: white;
     box-shadow: 0 10px 20px rgba(13, 148, 136, 0.3);
+    min-height: 80px;
 }
 
 .btn.primary:hover {
@@ -239,13 +240,6 @@ input[type="text"]:focus {
     border-color: var(--primary-color);
 }
 
-footer {
-    display: flex;
-    justify-content: center;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-    padding-top: 12px;
-}
-
 .btn.text-danger {
     background: transparent;
     color: var(--danger);
@@ -255,6 +249,13 @@ footer {
 
 .btn.text-danger:hover {
     background: rgba(239, 68, 68, 0.1);
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding-top: 12px;
 }
 
 /* Modal Konfirmasi Reset */

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const currentNumberDisplay = document.getElementById('currentNumberDisplay');
-    const btnSelanjutnya = document.getElementById('btnSelanjutnya');
+    const btnNext = document.getElementById('btnNext');
     // const btnPanggilUlang = document.getElementById('btnPanggilUlang');
     const counterZone = document.getElementById('counterZone');
     const btnManualCall = document.getElementById('btnManualCall');
@@ -59,7 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
             spokenNumber = `${number}`;        // example: seratus dua puluh lima
         }
 
-        const textToSpeak = `Nomor antrian, ${spokenNumber}, o so se yo Taeyang Sung inmida.`;
+        const textToSpeak = `Nomor antrian, ${spokenNumber}, o so se yo Taeyang Sung Im ni da.`;
+        //  const textToSpeak = `Nomor antrian, ${spokenNumber}, 어서 오세요! 태양성 입니다.`;
         const utterance = new SpeechSynthesisUtterance(textToSpeak);
 
         // set to bahasa Indonesia
@@ -85,6 +86,12 @@ document.addEventListener('DOMContentLoaded', () => {
             voice.name.includes('Gadis')
         );
 
+        let korVoice = voices.find(voice =>
+            voice.lang === 'ko-KR' ||
+            voice.lang === 'ko_KR' ||   
+            voice.name.includes('Korean')
+        );
+
         if (idVoice) {
             utterance.voice = idVoice;
         } else {
@@ -95,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // button "Selanjutnya" add 1 to queue
-    btnSelanjutnya.addEventListener('click', () => {
+    btnNext.addEventListener('click', () => {
         currentNumber++; // add 1 queue
         updateDisplay();
         speak(currentNumber);
