@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnSelanjutnya = document.getElementById('btnSelanjutnya');
     const btnPanggilUlang = document.getElementById('btnPanggilUlang');
     const btnPanggilManual = document.getElementById('btnPanggilManual');
-    const inputManual = document.getElementById('inputManual');
+    const manualNumber = document.getElementById('manualNumber');
     const btnReset = document.getElementById('btnReset');
     const currentDateDisplay = document.getElementById('currentDate');
 
@@ -111,14 +111,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // button "Panggil Manual" call a specific queue number
     btnPanggilManual.addEventListener('click', () => {
-        const val = parseInt(inputManual.value);
-        if (!isNaN(val) && val > 0) {
-            currentNumber = val; 
+        const newNumber = parseInt(manualNumber.value);
+        if (!isNaN(newNumber) && newNumber > 0) {
+            currentNumber = newNumber;
             updateDisplay();
             speak(currentNumber);
-            inputManual.value = '';
+            manualNumber.value = '';
         } else {
-            alert("Masukkan nomor antrian yang valid!");
+            alert("Masukkan nomor dan nama yang valid!");
         }
     });
 

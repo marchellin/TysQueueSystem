@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Panggilan Loket</title>
+    <title>Antrian Taeyang Sung</title>
     <link rel="icon" href="tys.jpeg" type="image/jpeg">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
     <div class="container">
         <header>
             <div class="logo-area">
-                <span class="material-icons">local_hospital</span> 
+                <span class="material-icons">local_hospital</span> <!-- TODO change to tys icon png -->
                 <h1>Taeyang Sung</h1>
             </div>
             <div class="date-area" id="currentDate">--</div>
@@ -23,33 +23,36 @@
 
         <main>
             <div class="counter-display">
-                <p class="subtitle">NOMOR ANTRIAN</p>
+                <h3 class="subtitle">NOMOR ANTRIAN</h3>
                 <h2 id="currentNumberDisplay">000</h2>
             </div>
 
-            <div class="controls"><!-- TODO resize button size -->
+            <div class="button-group">
                 <button id="btnPanggilUlang" class="btn secondary">
                     <span class="material-icons">replay</span>
-                    Panggil Ulang
-                </button>
+                    Ulang
+                </button><!-- TODO make listerner to number container -->
                 <button id="btnSelanjutnya" class="btn primary">
                     <span class="material-icons">navigate_next</span>
-                    Selanjutnya
+                    Next
                 </button>
-            </div>
-
-            <div class="manual-call">
-                <p>Panggil Nomor Spesifik:</p>
+                <div class="manual-call">
+                <p>Panggil Nomor:</p>
                 <div class="input-group">
-                    <input type="number" id="inputManual" min="1" max="999" placeholder="Contoh: 15">
-                    <button id="btnPanggilManual" class="btn outline">Panggil</button>
+                    <input type="number" id="manualNumber" min="1" max="999" placeholder="contoh: 15">
+                    <button id="btnPanggilManual" class="btn outline">
+                        <span class="material-icons">play_arrow</span> 
+                    </button>
                 </div>
             </div>
+            </div>
+
+            
         </main>
 
         <footer>
             <button id="btnReset" class="btn text-danger">
-                <span class="material-icons">restart_alt</span> Reset Antrian ke 0
+                <span class="material-icons">restart_alt</span> Reset
             </button>
         </footer>
     </div>
