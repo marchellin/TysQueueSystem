@@ -93,13 +93,17 @@ main {
     text-align: center; 
     box-shadow: 0 10px 25px rgba(13, 148, 136, 0.1);
     border: 1px solid rgba(13, 148, 136, 0.1);
+    cursor: pointer; /* make it clickable */
+}
+.counter-display:hover {
+  background-color: #f5f5f5; 
 }
 
 .subtitle {
     color: var(--text-muted);
     font-weight: 600;
     letter-spacing: 2px;
-    font-size: 18px;
+    font-size: 22px;
     margin-bottom: 10px;
 }
 
@@ -109,6 +113,10 @@ main {
     color: var(--primary-color);
     line-height: 1;
     text-shadow: 2px 4px 10px rgba(13, 148, 136, 0.2);
+}
+.micro-text {
+  font-size: 0.5rem; /* Scales beautifully with user settings */
+  /* Or use absolute pixels if you want it locked: font-size: 10px; */
 }
 
 .controls {
@@ -126,7 +134,7 @@ main {
 
 .btn {
     display: inline-flex;
-    align-items: center;  /* make it in right side */
+    align-items: center; 
     justify-content: center;
     gap: 12px;
     padding: 16px 20px;
@@ -154,14 +162,14 @@ main {
     transform: translateY(-2px);
 }
 
-.btn.secondary {
+/* .btn.secondary {
     background: var(--secondary-color);
     color: var(--text-main);
 }
 
 .btn.secondary:hover {
     background: var(--secondary-hover);
-}
+} */
 
 .btn.outline {
     background: transparent;
@@ -169,7 +177,6 @@ main {
     color: var(--primary-color);
     padding: 10px 10px;
     border-radius: 12px;
-    max-width: 60px; 
 }
 
 .btn.outline:hover {
@@ -194,6 +201,7 @@ main {
 
 .input-group {
     display: flex;
+    flex-direction: column;
     gap: 12px;
 }
 
@@ -235,7 +243,7 @@ footer {
     display: flex;
     justify-content: center;
     border-top: 1px solid rgba(0, 0, 0, 0.05);
-    padding-top: 20px;
+    padding-top: 12px;
 }
 
 .btn.text-danger {

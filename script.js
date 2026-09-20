@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const currentNumberDisplay = document.getElementById('currentNumberDisplay');
     const btnSelanjutnya = document.getElementById('btnSelanjutnya');
-    const btnPanggilUlang = document.getElementById('btnPanggilUlang');
-    const btnPanggilManual = document.getElementById('btnPanggilManual');
+    // const btnPanggilUlang = document.getElementById('btnPanggilUlang');
+    const counterZone = document.getElementById('counterZone');
+    const btnManualCall = document.getElementById('btnManualCall');
     const manualNumber = document.getElementById('manualNumber');
     const btnReset = document.getElementById('btnReset');
     const currentDateDisplay = document.getElementById('currentDate');
@@ -99,18 +100,25 @@ document.addEventListener('DOMContentLoaded', () => {
         updateDisplay();
         speak(currentNumber);
     });
-
-    // button "Panggil Ulang" repeat the current queue number
-    btnPanggilUlang.addEventListener('click', () => {
+    
+    // btnPanggilUlang.addEventListener('click', () => {
+    //     if (currentNumber > 0) {
+    //         speak(currentNumber);
+    //     } else {
+    //         alert("Belum ada antrian yang dipanggil hari ini.");
+    //     }
+    // });
+    // click the counter torepeat the current queue number
+    counterZone.addEventListener('click', () => {
         if (currentNumber > 0) {
             speak(currentNumber);
         } else {
             alert("Belum ada antrian yang dipanggil hari ini.");
         }
-    });
+});
 
     // button "Panggil Manual" call a specific queue number
-    btnPanggilManual.addEventListener('click', () => {
+    btnManualCall.addEventListener('click', () => {
         const newNumber = parseInt(manualNumber.value);
         if (!isNaN(newNumber) && newNumber > 0) {
             currentNumber = newNumber;
